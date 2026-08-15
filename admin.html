@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin — SAB Ventures</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%231B7A3D%22/><text x=%2250%22 y=%2266%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Georgia%22>S</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="admin">
+
+  <header class="site-header">
+    <div class="wrap nav-row">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">SV</span>
+        <span class="brand-text"><strong>SAB Ventures</strong><span>Admin</span></span>
+      </a>
+      <div class="nav-actions">
+        <a class="btn btn-outline btn-sm" href="products.html">← Back to Site</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ PASSWORD GATE ============ -->
+  <div class="admin-gate" id="gate">
+    <div class="gate-card">
+      <div class="icon-wrap">
+        <svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      </div>
+      <h2 style="font-size:1.3rem;">Staff Login</h2>
+      <p style="color:rgba(36,31,26,.6); font-size:.9rem;">Enter the shop password to manage products.</p>
+      <form id="gateForm">
+        <input type="password" id="gatePassword" placeholder="• • • • • • • •" autocomplete="current-password" required>
+        <div class="gate-error" id="gateError"></div>
+        <button type="submit" class="btn btn-call btn-block">Unlock</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ============ ADMIN DASHBOARD ============ -->
+  <div class="admin-shell" id="shell">
+    <section style="padding:34px 0 80px;">
+      <div class="wrap">
+        <div class="admin-toolbar">
+          <div>
+            <span class="admin-badge">Logged in</span>
+            <h1 style="font-size:1.6rem; margin-top:.3em;">Manage Products</h1>
+            <p style="margin:0; color:rgba(36,31,26,.6); font-size:.92rem;">Add new stock or remove items that are sold out. Changes appear on the Products page right away.</p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-outline btn-sm" id="resetBtn">Reset to Default Catalog</button>
+            <button class="btn btn-sm" style="background:var(--charcoal-ink); color:#fff;" id="logoutBtn">Log Out</button>
+          </div>
+        </div>
+
+        <div class="admin-layout">
+          <div class="form-card">
+            <h3>Add a Product</h3>
+            <form id="productForm">
+              <div class="field">
+                <label for="fName">Product Name</label>
+                <input type="text" id="fName" placeholder="e.g. 45/400 Spray Bottle" required>
+              </div>
+              <div class="field">
+                <label for="fCategory">Category</label>
+                <select id="fCategory" required></select>
+              </div>
+              <div class="field">
+                <label for="fUnit">Unit / Pack Size</label>
+                <input type="text" id="fUnit" placeholder="e.g. Per bundle, Per dozen">
+              </div>
+              <div class="field">
+                <label for="fNote">Short Description</label>
+                <textarea id="fNote" placeholder="One line about the item"></textarea>
+              </div>
+              <div class="field">
+                <label for="fImg">Image Path (optional)</label>
+                <input type="text" id="fImg" placeholder="images/products/example.jpg">
+                <div class="field-hint">Leave blank to show a placeholder until a real photo is added to /images/products/.</div>
+              </div>
+              <button type="submit" class="btn btn-call btn-block">Add Product</button>
+            </form>
+          </div>
+
+          <div>
+            <h3 style="font-size:1.05rem; margin-bottom:14px;">Current Catalog <span id="countBadge" style="font-family:var(--font-mono); font-size:.78rem; color:var(--market-green-dark);"></span></h3>
+            <div class="admin-list" id="adminList"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // ---- Change this password any time. It only gates this browser's UI —
+    // see the note at the top of js/products.js about the storage model. ----
+    const ADMIN_PASSWORD = "sabventures2026";
+
+    const gate = document.getElementById("gate");
+    const shell = document.getElementById("shell");
+    const gateForm = document.getElementById("gateForm");
+    const gateError = document.getElementById("gateError");
+    const toast = document.getElementById("toast");
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    function unlock(){
+      gate.style.display = "none";
+      shell.classList.add("open");
+      sessionStorage.setItem("sabv_admin_unlocked", "1");
+      renderCategorySelect();
+      renderAdminList();
+    }
+
+    gateForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const val = document.getElementById("gatePassword").value;
+      if (val === ADMIN_PASSWORD){
+        gateError.textContent = "";
+        unlock();
+      } else {
+        gateError.textContent = "Incorrect password — try again.";
+      }
+    });
+
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      sessionStorage.removeItem("sabv_admin_unlocked");
+      window.location.reload();
+    });
+
+    if (sessionStorage.getItem("sabv_admin_unlocked") === "1") unlock();
+
+    function renderCategorySelect(){
+      const sel = document.getElementById("fCategory");
+      sel.innerHTML = SABV_CATEGORIES.map(c => `<option value="${c.id}">${c.label}</option>`).join("");
+    }
+
+    function renderAdminList(){
+      const list = sabvLoadProducts();
+      document.getElementById("countBadge").textContent = `(${list.length} items)`;
+      const wrap = document.getElementById("adminList");
+      if (!list.length){
+        wrap.innerHTML = `<div class="empty-state"><h3>No products yet</h3><p>Add your first item using the form.</p></div>`;
+        return;
+      }
+      wrap.innerHTML = list.map(p => `
+        <div class="admin-row">
+          <img src="${p.img}" alt="${p.name}" data-fallback-cat="${p.category}" data-fallback-label="${p.name}">
+          <div class="meta">
+            <strong>${p.name}</strong>
+            <span>${sabvCategoryLabel(p.category)} · ${p.unit || "—"}</span>
+          </div>
+          <button class="del-btn" data-id="${p.id}" title="Delete product" aria-label="Delete ${p.name}">✕</button>
+        </div>
+      `).join("");
+      wrap.querySelectorAll("img").forEach(sabvBindImageFallback);
+    }
+
+    document.getElementById("productForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("fName").value.trim();
+      const category = document.getElementById("fCategory").value;
+      const unit = document.getElementById("fUnit").value.trim();
+      const note = document.getElementById("fNote").value.trim();
+      const img = document.getElementById("fImg").value.trim() || "images/products/placeholder.jpg";
+      if (!name) return;
+      sabvAddProduct({ name, category, unit, note, img });
+      e.target.reset();
+      renderCategorySelect();
+      renderAdminList();
+      showToast(`"${name}" added to the catalog`);
+    });
+
+    document.getElementById("adminList").addEventListener("click", (e) => {
+      const btn = e.target.closest(".del-btn");
+      if (!btn) return;
+      const row = btn.closest(".admin-row");
+      const name = row.querySelector("strong").textContent;
+      if (confirm(`Remove "${name}" from the catalog?`)){
+        sabvDeleteProduct(btn.dataset.id);
+        renderAdminList();
+        showToast(`"${name}" removed`);
+      }
+    });
+
+    document.getElementById("resetBtn").addEventListener("click", () => {
+      if (confirm("Reset the catalog to the default starter list? Any products you added or removed will be lost.")){
+        sabvResetToDefaults();
+        renderAdminList();
+        showToast("Catalog reset to defaults");
+      }
+    });
+  </script>
+</body>
+</html>
