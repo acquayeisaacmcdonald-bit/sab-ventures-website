@@ -2,17 +2,66 @@ SAB VENTURES — WEBSITE HANDOFF NOTES
 =====================================
 
 STRUCTURE
-  index.html       Home
-  products.html    Full catalog, filterable by category, deep-links to
-                    products.html#bags / #disposables / #bottles /
-                    #household / #popcorn
-  gallery.html      Auto-scrolling filmstrip + full photo grid + lightbox
-  about.html         Story, contact, embedded map
-  admin.html          Password-gated add/delete product dashboard
-  css/style.css        All design tokens + components live here
-  js/products.js       Product data + localStorage CRUD (edit
-                        DEFAULT_PRODUCTS here to change the starting catalog)
-  js/main.js            Shared nav / reveal-on-scroll / lightbox behaviour
+  index.html            Home — hero carousel (arrows/dots, per-slide caption)
+  products.html         Full catalog: sidebar filters, quick-view modal,
+                         order-list flyout, skeleton loading, deep-links to
+                         products.html#bags / #disposables / #bottles /
+                         #household / #popcorn
+  gallery.html           Auto-scrolling filmstrip + full photo grid + lightbox
+  about.html              Story, contact, embedded map
+  admin.html               Password-gated add/delete product dashboard
+  css/style.css             All design tokens + components live here
+  js/products.js            Product data + localStorage CRUD + Cloudflare
+                             KV sync stub (edit DEFAULT_PRODUCTS here to
+                             change the starting catalog)
+  js/main.js                 Shared nav / mega menu / reveal-on-scroll /
+                              lightbox behaviour
+  functions/api/products.js   Cloudflare Pages Function scaffold for the
+                               shared KV catalog — inactive until deployed
+                               + bound (see "CLOUDFLARE KV UPGRADE" below)
+
+NEW SINCE LAST HANDOFF (bug fixes + features)
+  - FIXED: hero slide fallback colour that matched the background exactly,
+    making the hero look like an empty box ~25% of the time. Hero is now a
+    proper JS carousel (fade, prev/next arrows, dots, per-slide caption)
+    built from real <img> tags using the same placeholder system as the
+    rest of the site — it can never render as a flat empty rectangle again.
+  - FIXED: the placeholder-image generator broke on any product/caption
+    containing "&" (e.g. "Spoons & Forks", "Bottles & gallons") because the
+    text wasn't XML-escaped before being embedded in the SVG — those showed
+    as broken image icons. Now escaped everywhere (sabvEscapeXml in
+    js/products.js).
+  - Mega menu: "Products" in the nav is now a dropdown with all 5
+    categories + icons, on every page (desktop hover, mobile/touch tap).
+  - Sidebar filters on products.html (category radio filters mirror the
+    chip bar, with live item counts).
+  - Quick View modal: click any product photo for a larger view + "Add to
+    List" without leaving the page.
+  - Order List flyout: tick the checkbox on any product card to add it to
+    a running list (bottom-right floating button, badge shows count). The
+    flyout builds ONE tidy WhatsApp message listing everything selected —
+    this is the equivalent of a "cart," sized for a WhatsApp-order business
+    rather than online checkout. Stored in sessionStorage (clears when the
+    browser tab closes, by design — it's a message-builder, not a real cart).
+  - Skeleton loading cards on products.html for a brief moment on load
+    (matches the polish of larger e-commerce sites, and avoids layout
+    shift on slow connections).
+
+CLOUDFLARE KV UPGRADE (the "later do the KVP thing" you mentioned)
+  functions/api/products.js is a ready-to-go Cloudflare Pages Function,
+  same shape as the Ray Digital / Braketi / Estell's Collection admin
+  dashboards. It does nothing until you:
+    1. Deploy this project on Cloudflare Pages.
+    2. Create a KV namespace and bind it to the project as "PRODUCTS_KV"
+       (Pages dashboard → Settings → Functions → KV namespace bindings).
+    3. Set an ADMIN_SECRET environment variable (Pages → Settings →
+       Environment variables) — this protects the add/delete endpoints.
+    4. Seed the KV key "catalog" once with the DEFAULT_PRODUCTS array from
+       js/products.js (via wrangler or the Pages UI).
+  Once that's live, every page's sabvSyncFromApi() call (already wired in
+  on load) starts pulling the shared catalog automatically — no other code
+  changes needed. Until then, everything keeps working exactly as it does
+  today off localStorage, so there's no rush and nothing to break.
 
 ADMIN PASSWORD
   Set in admin.html near the top of the <script> block:
