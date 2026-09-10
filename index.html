@@ -141,6 +141,22 @@
     setInterval(() => show((i + 1) % slides.length), 6000);
   })();
   </script>
+
+  <script>
+  (function () {
+    const slides = document.querySelectorAll('#heroSlideshow .hero-slide');
+    const dots = document.querySelectorAll('#heroSlideshow .hero-dot');
+    if (!slides.length) return;
+    let i = 0;
+    function show(n) {
+      slides.forEach((s, idx) => s.classList.toggle('active', idx === n));
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === n));
+      i = n;
+    }
+    dots.forEach(d => d.addEventListener('click', () => show(Number(d.dataset.i))));
+    setInterval(() => show((i + 1) % slides.length), 6000);
+  })();
+  </script>
   <div class="tear" aria-hidden="true"></div>
 
   <!-- ============ CATEGORIES — UPDATED WITH IMAGES ============ -->
