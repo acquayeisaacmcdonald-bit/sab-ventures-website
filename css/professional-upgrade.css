@@ -289,3 +289,119 @@ h1, h2, h3, .section-head h2, .hero h1 { letter-spacing: -0.025em; }
 ::selection { background: #c9a87c; color: #0a2e1e; }
 a, button, .btn { -webkit-tap-highlight-color: transparent; }
 img { transition: opacity 0.3s ease; }
+
+/* ============================================================
+   HERO — FIXED FULL-BLEED IMAGE (parallax stay-in-place)
+   Overrides the earlier solid-gradient hero.
+   ============================================================ */
+
+.hero {
+  position: relative !important;
+  background:
+    linear-gradient(180deg, rgba(6,26,18,0.72) 0%, rgba(6,26,18,0.55) 45%, rgba(6,26,18,0.85) 100%),
+    url("../images/hero/hero-main.png") center center / cover no-repeat fixed !important;
+  color: #fff !important;
+  padding: 140px 0 160px !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  min-height: 620px;
+  display: flex;
+  align-items: center;
+}
+
+/* Kill the diagonal stripe overlay from the previous version */
+.hero::before {
+  background-image: none !important;
+}
+
+/* Softer, wider text area over the photo */
+.hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.6rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.05 !important;
+  color: #ffffff !important;
+  max-width: 20ch;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+}
+.hero .eyebrow {
+  color: #e8d5b8 !important;
+  font-weight: 700;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+}
+.hero .eyebrow::before {
+  background: #c9a87c !important;
+}
+.hero .lead {
+  color: rgba(255,255,255,0.94) !important;
+  font-size: 1.1rem !important;
+  max-width: 52ch;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.35);
+}
+
+/* Stats row — glassier on photo */
+.hero-stats {
+  border-top: 1px solid rgba(255,255,255,0.22) !important;
+  padding-top: 22px !important;
+  margin-top: 28px !important;
+}
+.hero-stats strong {
+  color: #e8d5b8 !important;
+  font-size: 1.3rem !important;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+}
+.hero-stats span {
+  color: rgba(255,255,255,0.8) !important;
+  font-size: 0.68rem !important;
+  letter-spacing: 0.06em;
+}
+
+/* Buttons — solid contrast against any photo */
+.hero .btn-whatsapp {
+  background: #25D366 !important;
+  color: #06281a !important;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(37,211,102,0.45);
+}
+.hero .btn-whatsapp:hover {
+  background: #1da851 !important;
+  color: #ffffff !important;
+}
+.hero .btn-outline {
+  border: 2px solid rgba(255,255,255,0.85) !important;
+  color: #ffffff !important;
+  background: rgba(255,255,255,0.08) !important;
+  backdrop-filter: blur(6px);
+}
+.hero .btn-outline:hover {
+  background: #ffffff !important;
+  color: #06281a !important;
+}
+
+/* ---------- MOBILE / iOS fallback ----------
+   Safari (iOS) ignores background-attachment: fixed on mobile,
+   so we swap in a static cover image with a slightly darker
+   overlay for guaranteed readability. */
+@media (max-width: 900px), (hover: none) {
+  .hero {
+    background:
+      linear-gradient(180deg, rgba(6,26,18,0.78) 0%, rgba(6,26,18,0.6) 45%, rgba(6,26,18,0.88) 100%),
+      url("../images/hero/hero-main.png") center center / cover no-repeat scroll !important;
+    padding: 80px 0 96px !important;
+    min-height: 480px;
+  }
+  .hero h1 {
+    font-size: clamp(1.7rem, 7vw, 2.2rem) !important;
+    max-width: none;
+  }
+}
+
+/* ---------- Optional: parallax softening ----------
+   On desktop where the fixed bg works, cap the parallax so
+   very tall images don't show their edges. */
+@media (min-width: 901px) {
+  .hero {
+    background-size: cover;
+    background-position: center 30%;
+  }
+}
