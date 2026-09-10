@@ -1,0 +1,291 @@
+/* ============================================================
+   SAB VENTURES — PROFESSIONAL UPGRADE LAYER
+   Loaded AFTER style.css and professional.css.
+   Pure CSS overrides — no HTML changes required.
+   Delete this file (or its <link>) to roll back instantly.
+   ============================================================ */
+
+/* ---------- 1. TYPOGRAPHY — bolder, more confident ---------- */
+h1, h2, h3, .section-head h2, .hero h1 {
+  letter-spacing: -0.025em;
+}
+
+.section-head {
+  max-width: 720px;
+}
+.section-head h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.6rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  color: #0a0a0a;
+}
+.section-head p {
+  font-size: 1rem !important;
+  color: #4a4a4a !important;
+  max-width: 60ch;
+}
+.section-head .eyebrow {
+  color: #0d5c2c !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* ---------- 2. HERO — full-bleed dark panel with warm accent ---------- */
+.hero {
+  position: relative;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(201,168,124,0.18), transparent 45%),
+    radial-gradient(circle at 15% 90%, rgba(13,92,44,0.55), transparent 55%),
+    linear-gradient(120deg, #061a12 0%, #0a2e1e 45%, #0d5c2c 100%) !important;
+  color: #fff !important;
+  padding: 72px 0 84px !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(115deg, rgba(255,255,255,0.028) 0 2px, transparent 2px 42px);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero .wrap {
+  position: relative;
+  z-index: 1;
+}
+.hero h1 {
+  font-size: clamp(2rem, 4.8vw, 3.4rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.05 !important;
+
+cd "C:\Users\mcslg\Desktop\commercial websites\SAB ventures"
+
+for f in index.html products.html gallery.html about.html admin.html; do
+  # Only add if not already present
+  if ! grep -q 'professional-upgrade.css' "$f"; then
+    sed -i 's|<link rel="stylesheet" href="css/professional.css">|<link rel="stylesheet" href="css/professional.css">\n<link rel="stylesheet" href="css/professional-upgrade.css">|' "$f"
+    echo "  ✓ Added to $f"
+  else
+    echo "  · Skipped $f (already linked)"
+  fi
+done
+
+echo "✅ All pages linked to professional-upgrade.css"
+cd "C:\Users\mcslg\Desktop\commercial websites\SAB ventures"
+
+cat > css/professional-upgrade.css << 'EOF'
+/* ============================================================
+   SAB VENTURES — PROFESSIONAL UPGRADE LAYER
+   Loaded AFTER style.css and professional.css.
+   Pure CSS overrides — no HTML changes required.
+   ============================================================ */
+
+/* ---------- 1. TYPOGRAPHY ---------- */
+h1, h2, h3, .section-head h2, .hero h1 { letter-spacing: -0.025em; }
+.section-head { max-width: 720px; }
+.section-head h2 {
+  font-size: clamp(1.75rem, 3.5vw, 2.6rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  color: #0a0a0a;
+}
+.section-head p { font-size: 1rem !important; color: #4a4a4a !important; max-width: 60ch; }
+.section-head .eyebrow { color: #0d5c2c !important; font-weight: 700; letter-spacing: 0.08em; }
+
+/* ---------- 2. HERO ---------- */
+.hero {
+  position: relative;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(201,168,124,0.18), transparent 45%),
+    radial-gradient(circle at 15% 90%, rgba(13,92,44,0.55), transparent 55%),
+    linear-gradient(120deg, #061a12 0%, #0a2e1e 45%, #0d5c2c 100%) !important;
+  color: #fff !important;
+  padding: 72px 0 84px !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(115deg, rgba(255,255,255,0.028) 0 2px, transparent 2px 42px);
+  pointer-events: none; z-index: 0;
+}
+.hero .wrap { position: relative; z-index: 1; }
+.hero h1 {
+  font-size: clamp(2rem, 4.8vw, 3.4rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.05 !important;
+  color: #ffffff !important;
+  max-width: 18ch;
+}
+.hero .eyebrow { color: #c9a87c !important; font-weight: 700; }
+.hero .eyebrow::before { background: #c9a87c !important; }
+.hero .lead { color: rgba(255,255,255,0.88) !important; font-size: 1.05rem !important; max-width: 52ch; }
+.hero-stats { border-top: 1px solid rgba(255,255,255,0.15) !important; padding-top: 22px !important; margin-top: 26px !important; }
+.hero-stats strong { color: #c9a87c !important; font-size: 1.25rem !important; }
+.hero-stats span { color: rgba(255,255,255,0.7) !important; font-size: 0.68rem !important; letter-spacing: 0.06em; }
+.hero-image {
+  border: 6px solid rgba(255,255,255,0.12) !important;
+  border-radius: 14px !important;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06) inset;
+}
+.hero-image-badge { background: #c9a87c !important; color: #0a2e1e !important; font-weight: 700 !important; }
+.hero .btn-whatsapp { background: #25D366 !important; color: #ffffff !important; box-shadow: 0 8px 24px rgba(37,211,102,0.35); }
+.hero .btn-outline { border-color: rgba(255,255,255,0.6) !important; color: #ffffff !important; background: rgba(255,255,255,0.04); }
+.hero .btn-outline:hover { background: #ffffff !important; color: #0a2e1e !important; }
+
+/* ---------- 3. SECTION RHYTHM ---------- */
+.bg-white + .bg-white {
+  background:
+    radial-gradient(circle at 15% 10%, rgba(201,168,124,0.05), transparent 45%),
+    radial-gradient(circle at 90% 90%, rgba(13,92,44,0.04), transparent 45%),
+    #fbf9f5 !important;
+  border-top: 1px solid #eee9e0;
+}
+.bg-white {
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(201,168,124,0.04), transparent 40%),
+    radial-gradient(circle at 80% 100%, rgba(13,92,44,0.03), transparent 40%);
+  background-color: #ffffff;
+}
+.bg-ink {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(201,168,124,0.1), transparent 45%),
+    linear-gradient(135deg, #061a12, #0a2e1e) !important;
+}
+.bg-green { background: linear-gradient(120deg, #0a2e1e 0%, #0d5c2c 100%) !important; }
+
+/* ---------- 4. CATEGORY CARDS ---------- */
+.cat-grid { gap: 20px !important; }
+.tag-card {
+  padding: 0 !important; overflow: hidden;
+  border-radius: 14px !important;
+  border: 1px solid #e8e8ea !important;
+  background: #ffffff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.tag-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: #0d5c2c !important;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08) !important;
+}
+.tag-card .cat-img { margin-bottom: 0 !important; border-radius: 0 !important; aspect-ratio: 4 / 3; }
+.tag-card .cat-img::after { background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.15) 100%) !important; }
+.tag-card h3 { padding: 18px 20px 6px; font-size: 1.02rem !important; font-weight: 700 !important; color: #0a0a0a !important; line-height: 1.3; }
+.tag-card p { padding: 0 20px; font-size: 0.86rem !important; color: #5a5a5a !important; line-height: 1.5; }
+.tag-card .count {
+  padding: 10px 20px 20px !important; display: block !important;
+  font-size: 0.7rem !important; font-weight: 600 !important;
+  color: #0d5c2c !important; letter-spacing: 0.04em; text-transform: uppercase;
+}
+.tag-card[style*="background:var(--brand-blue)"] { padding: 24px 22px !important; }
+.tag-card[style*="background:var(--brand-blue)"] h3,
+.tag-card[style*="background:var(--brand-blue)"] p,
+.tag-card[style*="background:var(--brand-blue)"] .btn { padding-left: 0 !important; padding-right: 0 !important; }
+.tag-card .icon-wrap {
+  background: #0d5c2c !important; color: #fff !important;
+  width: 46px !important; height: 46px !important;
+  border-radius: 12px !important; margin: 20px 20px 12px !important;
+}
+
+/* ---------- 5. PRODUCT CARDS ---------- */
+.prod-grid { gap: 22px !important; }
+.prod-card {
+  border-radius: 14px !important;
+  border: 1px solid #e8e8ea !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.prod-card:hover {
+  transform: translateY(-4px) !important;
+  border-color: #0d5c2c !important;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08) !important;
+}
+.prod-card .prod-body { padding: 16px 18px 18px !important; }
+.prod-card .prod-body h3 { font-size: 0.98rem !important; font-weight: 700 !important; color: #0a0a0a !important; letter-spacing: -0.01em; }
+.prod-card .prod-body .unit { font-size: 0.7rem !important; color: #0d5c2c !important; font-weight: 600 !important; letter-spacing: 0.03em; text-transform: uppercase; }
+.prod-card .prod-body p { font-size: 0.82rem !important; color: #5a5a5a !important; line-height: 1.5; }
+.prod-badge { border-radius: 4px !important; font-size: 0.6rem !important; padding: 3px 10px !important; letter-spacing: 0.06em; font-weight: 800 !important; text-transform: uppercase; }
+
+/* ---------- 6. TRUST STRIP ---------- */
+.trust-strip {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px !important; padding: 0 !important; border: none !important;
+}
+.trust-item {
+  background: #ffffff; border: 1px solid #e8e8ea; border-radius: 14px;
+  padding: 22px 24px; display: flex !important; align-items: center; gap: 16px;
+  transition: all 0.2s ease;
+}
+.trust-item:hover { border-color: #0d5c2c; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,0.06); }
+.trust-item .icon-wrap {
+  background: #0d5c2c !important; color: #ffffff !important;
+  width: 46px !important; height: 46px !important; border-radius: 12px !important;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.trust-item .icon-wrap svg { stroke: #ffffff !important; width: 22px !important; height: 22px !important; }
+.trust-item strong { font-size: 0.95rem !important; font-weight: 700 !important; color: #0a0a0a !important; letter-spacing: -0.01em; }
+.trust-item span { font-size: 0.78rem !important; color: #6a6a6a !important; }
+
+/* ---------- 7. PROMO BANNERS ---------- */
+.promo-banner { border-radius: 14px !important; padding: 28px 30px !important; position: relative; overflow: hidden; }
+.promo-banner.tint-green { background: linear-gradient(135deg, #e8f3ec 0%, #d4ead9 100%) !important; border-color: #b8d4c0 !important; }
+.promo-banner.tint-blue { background: linear-gradient(135deg, #eaf1f7 0%, #d6e4f0 100%) !important; border-color: #c0d4e4 !important; }
+.promo-banner.tint-red { background: linear-gradient(135deg, #f8ebeb 0%, #f0d6d6 100%) !important; border-color: #e4c0c0 !important; }
+.promo-banner h3 { font-size: 1.15rem !important; font-weight: 700 !important; color: #0a0a0a !important; letter-spacing: -0.015em; }
+.promo-banner .promo-tag { color: #0d5c2c !important; font-weight: 800 !important; letter-spacing: 0.08em !important; }
+.promo-banner.small h3 { font-size: 0.95rem !important; }
+
+/* ---------- 8. FILMSTRIP ---------- */
+.film-frame { border-radius: 12px !important; border: 2px solid rgba(255,255,255,0.08) !important; box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
+.film-frame .cap { font-weight: 700; letter-spacing: 0.02em; }
+
+/* ---------- 9. FOOTER ---------- */
+.site-footer {
+  position: relative; padding: 60px 0 28px !important;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(201,168,124,0.08), transparent 45%),
+    linear-gradient(135deg, #061a12 0%, #0a2e1e 100%) !important;
+}
+.site-footer::before {
+  content: "SV"; position: absolute; right: 4%; top: -10%;
+  font-size: 20rem; font-weight: 900; color: rgba(255,255,255,0.02);
+  line-height: 1; pointer-events: none; font-family: 'Fraunces', Georgia, serif; z-index: 0;
+}
+.site-footer .wrap { position: relative; z-index: 1; }
+.site-footer h4 { color: #c9a87c !important; font-size: 0.82rem !important; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+.site-footer .brand-mark { background: #c9a87c !important; color: #0a2e1e !important; font-weight: 900; }
+
+/* ---------- 10. LOCATION ---------- */
+.location-card { border-radius: 14px !important; overflow: hidden; border: 1px solid #e8e8ea !important; box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
+
+/* ---------- 11. GALLERY GRID ---------- */
+.g-item { border-radius: 12px !important; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.g-item:hover { transform: scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+.g-item img { transition: transform 0.6s ease, filter 0.3s ease; }
+.g-item:hover img { transform: scale(1.08); filter: brightness(1.05) saturate(1.1); }
+
+/* ---------- 12. MOBILE ---------- */
+@media (max-width: 768px) {
+  .hero { padding: 48px 0 56px !important; }
+  .hero h1 { max-width: none; font-size: clamp(1.6rem, 7vw, 2rem) !important; }
+  .section-head h2 { font-size: 1.35rem !important; }
+  .tag-card h3 { padding: 12px 14px 4px !important; font-size: 0.9rem !important; }
+  .tag-card p { padding: 0 14px; font-size: 0.78rem !important; }
+  .tag-card .count { padding: 8px 14px 14px !important; }
+  .trust-item { padding: 16px 18px; }
+  .site-footer::before { display: none; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 1.5rem !important; }
+  .tag-card .cat-img { aspect-ratio: 16 / 10; }
+}
+
+/* ---------- 13. GLOBAL POLISH ---------- */
+::selection { background: #c9a87c; color: #0a2e1e; }
+a, button, .btn { -webkit-tap-highlight-color: transparent; }
+img { transition: opacity 0.3s ease; }

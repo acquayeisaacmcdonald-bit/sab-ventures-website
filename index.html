@@ -7,12 +7,11 @@
 <meta name="description" content="SAB Ventures (Maame Serwaah), Bogoso — wholesale & retail dealers in polythene bags, disposables, bottles, tissue & packaging supplies. Call or WhatsApp to order.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2222%22 fill=%22%231B7A3D%22/><text x=%2250%22 y=%2266%22 font-size=%2250%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Georgia%22>S</text></svg>">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/professional.css">
+<link rel="stylesheet" href="css/professional-upgrade.css">
 <script src="js/products.js"></script>
 </head>
 <body data-page="home">
-  <!-- Social rail — replaces static header/footer social icons; sits fixed
-       to the left edge on every page. Facebook href is a placeholder until
-       Isaac provides the real page URL (see README). -->
   <aside class="social-rail">
     <a href="https://www.tiktok.com/@serwaah.ampaafo.b" target="_blank" rel="noopener" aria-label="TikTok" data-social="tiktok">
       <svg class="i" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M16.5 2h-3v13.6a2.9 2.9 0 1 1-2.1-2.8v-3.1a6 6 0 1 0 5.1 5.9V9.2a7.4 7.4 0 0 0 4.5 1.6V7.8A4.4 4.4 0 0 1 16.5 3.4V2Z"/></svg>
@@ -31,7 +30,6 @@
       <span class="rail-tip">Call</span>
     </a>
   </aside>
-
 
   <div class="topline">
     <div class="wrap">
@@ -54,8 +52,9 @@
               Products
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
             </button>
-            <div class="mega-panel" id="megaPanel"><!-- injected by main.js from SABV_CATEGORIES --></div>
+            <div class="mega-panel" id="megaPanel"></div>
           </li>
+          <li><a href="products.html" data-nav="shopall" class="shop-all-link">Shop All</a></li>
           <li><a href="gallery.html" data-nav="gallery">Gallery</a></li>
           <li><a href="about.html" data-nav="about">About & Location</a></li>
         </ul>
@@ -92,7 +91,7 @@
     </div>
   </aside>
 
-  <!-- ============ HERO — full-bleed slideshow ============ -->
+  <!-- ============ HERO ============ -->
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy reveal in">
@@ -113,7 +112,7 @@
         </div>
       </div>
       <div class="hero-image reveal in">
-        <img onerror="sabvOnImgError(this)" src="images/hero/hero-main.jpg" alt="Stacked bags and packaging supplies at SAB Ventures"
+        <img onerror="sabvOnImgError(this)" src="images/hero/hero-main.png" alt="Stacked bags and packaging supplies at SAB Ventures"
              data-fallback-cat="bags" data-fallback-label="SAB Ventures stock">
         <span class="hero-image-badge">Open now · Bogoso</span>
       </div>
@@ -121,7 +120,7 @@
   </section>
   <div class="tear" aria-hidden="true"></div>
 
-  <!-- ============ CATEGORIES ============ -->
+  <!-- ============ CATEGORIES — UPDATED WITH IMAGES ============ -->
   <section class="bg-white">
     <div class="wrap">
       <div class="section-head reveal">
@@ -131,31 +130,46 @@
       </div>
       <div class="cat-grid">
         <a class="tag-card reveal" href="products.html#bags">
-          <div class="icon-wrap"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9h12l-1 12H7L6 9Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg></div>
+          <div class="cat-img">
+            <img onerror="sabvOnImgError(this)" src="images/categories/bags.png" alt="Polythene & Rubber Bags"
+                 data-fallback-cat="bags" data-fallback-label="Polythene Bags">
+          </div>
           <h3>Polythene &amp; Rubber Bags</h3>
           <p>Olonka, Apapa3, take-away, banku, ice-water &amp; more — all sizes.</p>
           <span class="count">13 items</span>
         </a>
         <a class="tag-card reveal" href="products.html#disposables">
-          <div class="icon-wrap"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div>
+          <div class="cat-img">
+            <img onerror="sabvOnImgError(this)" src="images/categories/disposables.png" alt="Disposables & Cutlery"
+                 data-fallback-cat="disposables" data-fallback-label="Disposables">
+          </div>
           <h3>Disposables &amp; Cutlery</h3>
           <p>Bowls, plates, cups, spoons, forks, straws &amp; toothpicks.</p>
           <span class="count">8 items</span>
         </a>
         <a class="tag-card reveal" href="products.html#bottles">
-          <div class="icon-wrap"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2h4v4l3 3v11a2 2 0 0 1-2 2h-6a2 2 0 0 1-2-2V9l3-3V2Z"/></svg></div>
+          <div class="cat-img">
+            <img onerror="sabvOnImgError(this)" src="images/categories/bottles.png" alt="Bottles & Containers"
+                 data-fallback-cat="bottles" data-fallback-label="Bottles">
+          </div>
           <h3>Bottles &amp; Containers</h3>
           <p>Sobolo, kenkey, pharma, shito bottles &amp; gallons, all sizes.</p>
           <span class="count">5 items</span>
         </a>
         <a class="tag-card reveal" href="products.html#household">
-          <div class="icon-wrap"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 10h16"/></svg></div>
+          <div class="cat-img">
+            <img onerror="sabvOnImgError(this)" src="images/categories/household.png" alt="Household & Packaging"
+                 data-fallback-cat="household" data-fallback-label="Household">
+          </div>
           <h3>Household &amp; Packaging</h3>
           <p>Tissue, T-rolls, ziplocks, chairs, mopping sticks &amp; ribbons.</p>
           <span class="count">8 items</span>
         </a>
         <a class="tag-card reveal" href="products.html#popcorn">
-          <div class="icon-wrap"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c-2 0-3 2-2 4-2 0-3 2-1 4-2 1-2 4 1 4h4c3 0 3-3 1-4 2-2 1-4-1-4 1-2 0-4-2-4Z"/><path d="M9 21l1-6M15 21l-1-6"/></svg></div>
+          <div class="cat-img">
+            <img onerror="sabvOnImgError(this)" src="images/categories/popcorn.png" alt="Popcorn Corn"
+                 data-fallback-cat="popcorn" data-fallback-label="Popcorn Corn">
+          </div>
           <h3>Popcorn Corn</h3>
           <p>Quality corn for popcorn making, sold by weight.</p>
           <span class="count">1 item</span>
@@ -171,7 +185,7 @@
 
   <div class="tear" aria-hidden="true"></div>
 
-  <!-- ============ FEATURED PRODUCTS (static grid, no carousel) ============ -->
+  <!-- ============ FEATURED PRODUCTS ============ -->
   <section class="bg-white">
     <div class="wrap">
       <div class="section-head reveal">
@@ -186,7 +200,7 @@
   </section>
   <div class="tear" aria-hidden="true"></div>
 
-  <!-- ============ PROMO STRIP (quick category jumps) ============ -->
+  <!-- ============ PROMO STRIP ============ -->
   <section class="bg-white" style="padding-top:44px;">
     <div class="wrap">
       <div class="section-head reveal">
@@ -213,7 +227,6 @@
       </div>
     </div>
   </section>
-
 
   <div class="tear" aria-hidden="true"></div>
 
@@ -315,16 +328,15 @@
     <a class="m-wa" href="https://wa.me/233242939938" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2Z"/></svg>WhatsApp</a>
     <a class="m-dir" href="https://www.google.com/maps?q=Bogoso+Town+Hall,+Kokoase+Taxi+Station,+Ghana" target="_blank" rel="noopener"><svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg>Directions</a>
   </div>
+
   <script src="js/main.js"></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
 
-    // ---- Featured Products (static grid, no auto-rotation) ----
+    // ---- Featured Products ----
     (function(){
       const grid = document.getElementById("featuredGrid");
       const all = sabvLoadProducts();
-      // Feature the item explicitly badged in each category, falling back to
-      // the first item in that category if none is badged yet.
       const picks = SABV_CATEGORIES.map(cat =>
         all.find(p => p.category === cat.id && p.badge) || all.find(p => p.category === cat.id)
       ).filter(Boolean).slice(0, 6);
@@ -347,7 +359,7 @@
         </div>`).join("");
     })();
 
-    // Build home filmstrip from gallery placeholder set (8 frames, looped x2 for seamless scroll)
+    // ---- Home filmstrip ----
     (function(){
       const strip = document.getElementById("homeFilmstrip");
       const shots = [

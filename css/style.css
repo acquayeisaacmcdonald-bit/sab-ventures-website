@@ -906,3 +906,258 @@ footer.site-footer{ background:var(--text-dark); color:rgba(251,243,227,.85); pa
 @media (min-width:641px){
   .mobile-cta-bar{ display:none !important; }
 }
+
+/* ===== CATEGORY CARD IMAGES ===== */
+.tag-card .cat-img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: #f5f6f8;
+  position: relative;
+}
+.tag-card .cat-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease, filter 0.3s ease;
+  display: block;
+}
+.tag-card:hover .cat-img img {
+  transform: scale(1.06);
+  filter: brightness(1.04);
+}
+.tag-card .cat-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.08) 100%);
+  pointer-events: none;
+}
+@media (max-width: 480px) {
+  .tag-card .cat-img {
+    aspect-ratio: 4 / 3;
+    margin-bottom: 10px;
+  }
+}
+
+/* ===== MEGA MENU FIX ===== */
+.has-mega {
+  position: relative;
+}
+.has-mega:hover .mega-panel,
+.mega-panel:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.mega-panel::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: transparent;
+}
+.mega-panel {
+  z-index: 999;
+}
+
+/* ===== SHOP ALL LINK (persistent, across all pages) ===== */
+nav.primary-nav .shop-all-link {
+  color: var(--brand-blue, #1a3a2e);
+  font-weight: 700;
+  position: relative;
+}
+nav.primary-nav .shop-all-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background: var(--accent-yellow, #c9a87c);
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+nav.primary-nav .shop-all-link:hover::after {
+  transform: scaleX(1);
+}
+nav.primary-nav a[data-nav="shopall"].active {
+  color: var(--brand-blue, #1a3a2e);
+}
+nav.primary-nav a[data-nav="shopall"].active::after {
+  transform: scaleX(1);
+}
+
+/* ===== STRONGER FIX for Shop All Products button ===== */
+.mega-panel .shop-all-cta .btn {
+  padding: 12px 32px !important;
+  min-width: 180px !important;
+  text-align: center;
+  letter-spacing: 0.02em;
+  background: var(--brand-blue, #1a3a2e) !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+}
+.mega-panel .shop-all-cta .btn:hover {
+  background: var(--accent-yellow, #c9a87c) !important;
+  color: var(--brand-blue, #1a3a2e) !important;
+}
+
+/* ===== Shop All Products button — WHITE label ===== */
+.mega-panel .shop-all-cta .btn,
+.mega-panel .mega-footer .btn {
+  color: #ffffff !important;
+}
+.mega-panel .shop-all-cta .btn:hover,
+.mega-panel .mega-footer .btn:hover {
+  color: #ffffff !important;
+}
+
+/* ===== Shop All Products button — high contrast ===== */
+.mega-panel .shop-all-cta .btn,
+.mega-panel .mega-footer .btn {
+  background: #0d5c2c !important;   /* deep green — strong contrast with white label */
+  color: #ffffff !important;
+  border: 1px solid #0a4a22 !important;
+  box-shadow: 0 2px 6px rgba(13,92,44,0.25) !important;
+}
+.mega-panel .shop-all-cta .btn:hover,
+.mega-panel .mega-footer .btn:hover {
+  background: #0a4a22 !important;   /* darker on hover */
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(13,92,44,0.4) !important;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   MEGA MENU — HIGH VISIBILITY LABELS (applies to all pages)
+   ============================================================ */
+
+/* Main category labels */
+.mega-panel .mega-cat,
+.mega-panel .mega-cat-label,
+.mega-panel .cat-name,
+.mega-panel a .cat-label {
+  color: #0a0a0a !important;
+  font-weight: 700 !important;
+  font-size: 0.92rem !important;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+/* "Browse ..." sub-labels */
+.mega-panel .mega-cat-sub,
+.mega-panel .cat-sub,
+.mega-panel a small,
+.mega-panel .mega-sub {
+  color: #4a4a4a !important;
+  font-weight: 500 !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.01em;
+}
+
+/* Hover state — stronger emphasis */
+.mega-panel a:hover .cat-label,
+.mega-panel a:hover .mega-cat,
+.mega-panel a:hover .cat-name {
+  color: #0d5c2c !important;
+}
+.mega-panel a:hover .cat-sub,
+.mega-panel a:hover small,
+.mega-panel a:hover .mega-sub {
+  color: #0d5c2c !important;
+  opacity: 0.85;
+}
+
+/* Icon circle — stronger contrast */
+.mega-panel .mega-icon,
+.mega-panel .cat-icon {
+  background: #0d5c2c !important;
+  color: #ffffff !important;
+}
+
+/* If your mega panel renders as list items with a heading */
+.mega-panel h3,
+.mega-panel h4,
+.mega-panel strong {
+  color: #0a0a0a !important;
+  font-weight: 700 !important;
+}
+
+/* Fallback: any link text inside the mega panel */
+.mega-panel a {
+  color: #0a0a0a !important;
+}
+.mega-panel a:hover {
+  color: #0d5c2c !important;
+}
+
+/* ============================================================
+   PRIMARY NAV — "Products" trigger must ALWAYS be visible
+   (fixes invisible label across all pages)
+   ============================================================ */
+
+/* The mega-trigger button — force dark, readable color */
+nav.primary-nav .mega-trigger,
+nav.primary-nav button.mega-trigger {
+  color: #1a1a1a !important;
+  background: transparent !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  border: none !important;
+  padding: 6px 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px;
+  cursor: pointer;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Keep the arrow icon the same color as the text */
+nav.primary-nav .mega-trigger svg {
+  stroke: #1a1a1a !important;
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+
+/* Hover / open state — accent color */
+nav.primary-nav .mega-trigger:hover,
+nav.primary-nav .mega-trigger[aria-expanded="true"] {
+  color: #0d5c2c !important;
+}
+nav.primary-nav .mega-trigger:hover svg,
+nav.primary-nav .mega-trigger[aria-expanded="true"] svg {
+  stroke: #0d5c2c !important;
+  transform: rotate(180deg);
+}
+
+/* Underline only when active/hovered — matches other nav links */
+nav.primary-nav .mega-trigger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: #c9a87c;
+  transition: width 0.2s ease;
+}
+nav.primary-nav .mega-trigger:hover::after,
+nav.primary-nav .mega-trigger[aria-expanded="true"]::after,
+nav.primary-nav .has-mega.open .mega-trigger::after {
+  width: 100%;
+}
+
+/* Ensure the parent <li> doesn't clip or hide the trigger */
+nav.primary-nav li.has-mega {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
