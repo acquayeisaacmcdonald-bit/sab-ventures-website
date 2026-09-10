@@ -91,16 +91,22 @@
     </div>
   </aside>
 
-  <!-- ============ HERO ============ -->
-  <section class="hero">
+  <!-- ============ HERO — auto-rotating slideshow ============ -->
+  <section class="hero" id="heroSlideshow">
+    <div class="hero-slides">
+      <div class="hero-slide active" style="background-image:url('images/hero/hero-1.png');"></div>
+      <div class="hero-slide" style="background-image:url('images/hero/hero-2.png');"></div>
+      <div class="hero-slide" style="background-image:url('images/hero/hero-3.png');"></div>
+    </div>
+
     <div class="wrap hero-grid">
-      <div class="hero-copy reveal in">
+      <div class="hero-copy">
         <span class="eyebrow">Bogoso · Kokoase Taxi Station</span>
         <h1>Bulk bags, bottles &amp; packaging — sorted, every time.</h1>
         <p class="lead">SAB Ventures is Bogoso's go-to wholesale &amp; retail shop for polythene bags, disposables, bottles, tissue and packaging supplies — stocked deep, priced fair, ready when you are.</p>
         <div class="hero-actions">
           <a class="btn btn-whatsapp" href="https://wa.me/233242939938?text=Hello%20SAB%20Ventures%2C%20I%27d%20like%20to%20order..." target="_blank" rel="noopener">
-            <svg class="i" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1 1 12 20Zm4.4-5.8c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.1-.3.2-.5.1a6.6 6.6 0 0 1-1.9-1.2 7 7 0 0 1-1.3-1.6c-.1-.2 0-.4.1-.5l.4-.4.2-.4v-.4c-.1-.1-.5-1.2-.7-1.7-.2-.4-.4-.4-.5-.4h-.5a.9.9 0 0 0-.6.3 2.7 2.7 0 0 0-.8 2 4.7 4.7 0 0 0 1 2.5 10.6 10.6 0 0 0 4.1 3.6c.6.2 1 .4 1.4.5.6.2 1.1.1 1.5.1.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1Z"/></svg>
+            <svg class="i" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2Z"/></svg>
             Order on WhatsApp
           </a>
           <a class="btn btn-outline" href="products.html">Browse Products</a>
@@ -111,13 +117,30 @@
           <div><strong>Wholesale</strong><span>&amp; Retail Pricing</span></div>
         </div>
       </div>
-      <div class="hero-image reveal in">
-        <img onerror="sabvOnImgError(this)" src="images/hero/hero-main.png" alt="Stacked bags and packaging supplies at SAB Ventures"
-             data-fallback-cat="bags" data-fallback-label="SAB Ventures stock">
-        <span class="hero-image-badge">Open now · Bogoso</span>
-      </div>
+    </div>
+
+    <div class="hero-dots">
+      <button class="hero-dot active" data-i="0" aria-label="Slide 1"></button>
+      <button class="hero-dot" data-i="1" aria-label="Slide 2"></button>
+      <button class="hero-dot" data-i="2" aria-label="Slide 3"></button>
     </div>
   </section>
+
+  <script>
+  (function () {
+    const slides = document.querySelectorAll('#heroSlideshow .hero-slide');
+    const dots = document.querySelectorAll('#heroSlideshow .hero-dot');
+    if (!slides.length) return;
+    let i = 0;
+    function show(n) {
+      slides.forEach((s, idx) => s.classList.toggle('active', idx === n));
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === n));
+      i = n;
+    }
+    dots.forEach(d => d.addEventListener('click', () => show(Number(d.dataset.i))));
+    setInterval(() => show((i + 1) % slides.length), 6000);
+  })();
+  </script>
   <div class="tear" aria-hidden="true"></div>
 
   <!-- ============ CATEGORIES — UPDATED WITH IMAGES ============ -->
